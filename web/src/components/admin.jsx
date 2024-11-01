@@ -22,8 +22,6 @@ const Admin = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-
     try {
       const response = await axios.post(`${import.meta.env.VITE_EVENT_API}/addevent`, formData);
       alert("New Event Added");
@@ -53,14 +51,14 @@ const Admin = () => {
   }, []);
 
   // Remove event
-  const handleRemoveEvent = async (id) => {
-    try {
-      await axios.delete(`${import.meta.env.VITE_EVENT_API}/delete/?${id}`);
-      setEvents(events.filter(event => event._id !== id));
-    } catch (error) {
-      console.error("Error removing event:", error);
-    }
-  };
+  // const handleRemoveEvent = async (id) => {
+  //   try {
+  //     await axios.delete(`${import.meta.env.VITE_EVENT_API}/delete/?${id}`);
+  //     setEvents(events.filter(event => event._id !== id));
+  //   } catch (error) {
+  //     console.error("Error removing event:", error);
+  //   }
+  // };
 
   return (
     <>
