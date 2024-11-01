@@ -51,14 +51,15 @@ const Admin = () => {
   }, []);
 
   // Remove event
-  // const handleRemoveEvent = async (id) => {
-  //   try {
-  //     await axios.delete(`${import.meta.env.VITE_EVENT_API}/delete/?${id}`);
-  //     setEvents(events.filter(event => event._id !== id));
-  //   } catch (error) {
-  //     console.error("Error removing event:", error);
-  //   }
-  // };
+  const handleRemoveEvent = async (id) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_EVENT_API}/delete/${id}`);
+      alert("Event deleted");
+      setEvents(events.filter(event => event._id !== id));
+    } catch (error) {
+      console.error("Error removing event:", error);
+    }
+  };
 
   return (
     <>

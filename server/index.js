@@ -40,14 +40,14 @@ app.get('/event', async (req, resp) => {
 
 // Route to add a new event
 app.post('/addevent', async (req, resp) => {
-    
-    const { title,  startDateTime, endDateTime } = req.body;
+
+    const { title, startDateTime, endDateTime } = req.body;
     const startDate = new Date(startDateTime);
     const endDate = new Date(endDateTime);
     const newevent = new addeventschema({
         title,
         start: startDate,
-        end:endDate
+        end: endDate
     });
     try {
         const eventadded = await newevent.save();
@@ -58,7 +58,23 @@ app.post('/addevent', async (req, resp) => {
     }
 });
 
+app.delete("/delete/:_id", async (req, resp) => {
+    const {_id} = req.params;
+    
+    try {
+        const resultL = await addeventschema.deleteOne({
+            _id: new mongoose.mongo.ObjectId(_id)
+        });
+        resp.send(resultL);
+        
+    }
+    catch(err){
+        resp.status(500).json({ message: 'Error delete item', err });
+    }
+}
+)
+
 // Start the server
-app.listen(process.env.PORT , () => {
+app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
 });
