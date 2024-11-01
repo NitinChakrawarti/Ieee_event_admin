@@ -25,8 +25,13 @@ const Admin = () => {
     console.log(formData);
 
     try {
-      const response = await axios.post("http://localhost:5174/addevent", formData);
-      
+      const response = await axios.post(`${import.meta.env.VITE_EVENT_API}/addevent`, formData);
+      alert("New Event Added");
+      setFormData({
+        title: "",
+        startDateTime: "",
+        endDateTime: ""
+      })
       setEvents([...events, response.data]);
       toggleModal();
     } catch (error) {
@@ -38,7 +43,7 @@ const Admin = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5174/event");
+        const response = await axios.get(`${import.meta.env.VITE_EVENT_API}/event`);
         setEvents(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -50,7 +55,7 @@ const Admin = () => {
   // Remove event
   const handleRemoveEvent = async (id) => {
     try {
-      await axios.delete(`http://localhost:5174/event/${id}`);
+      await axios.delete(`${import.meta.env.VITE_EVENT_API}/delete/?${id}`);
       setEvents(events.filter(event => event._id !== id));
     } catch (error) {
       console.error("Error removing event:", error);
