@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv')
-// const db_url = "mongodb+srv://nitincsbs:j7Gp3LnHm6Ddz0NL@nitin.z7qpz.mongodb.net/ieee"
 dotenv.config({path: './config.env'});
 const db_url = process.env.MONGODB_IEEE_DB;
 
